@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Voter Eligibility Checker</title>
+<style>
+    body {
+        background-color: rgb(230, 240, 255);
+        font-family: Arial;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+    }
+    .form-box {
+        width: 300px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+    h2 {
+        text-align: center;
+    }
+    input {
+        width: 270px;
+        height: 35px;
+        margin-bottom: 15px;
+        padding-left: 10px;
+        border: 1px solid gray;
+        border-radius: 5px;
+        font-size: 15px;
+    }
+    button {
+        width: 285px;
+        height: 40px;
+        background-color: rgb(0, 123, 255);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+    button:hover {
+        background-color: rgb(0, 90, 190);
+    }
+    #result {
+        text-align: center;
+        font-size: 15px;
+        font-weight: bold;
+        margin-top: 15px;
+        min-height: 20px;
+    }
+    .eligible {
+        color: green;
+    }
+    .not-eligible {
+        color: red;
+    }
+</style>
+</head>
+<body>
+
+<div class="form-box">
+    <h2>Voter Eligibility Check</h2>
+    <input type="text" id="name" placeholder="Full Name">
+    <input type="email" id="email" placeholder="Email">
+    <input type="date" id="dob">
+    <button onclick="checkEligibility()">Submit</button>
+    <p id="result"></p>
+</div>
+
+<script>
+function checkEligibility() {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const dob = document.getElementById('dob').value;
+    const resultEl = document.getElementById('result');
+
+    // Basic validation
+    if (!name || !email || !dob) {
+        resultEl.textContent = "Please fill in all fields.";
+        resultEl.className = "not-eligible";
+        return;
+    }
+
+    // Calculate age
+    const birthDate = new Date(dob);
+    const today = new Date();
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    const dayDiff = today.getDate() - birthDate.getDate();
+
+    // Adjust age if birthday hasn't occurred yet this year
+    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+        age--;
+    }
+
+    if (age >= 18) {
+        resultEl.textContent = `${name}, you are ${age} years old `;
+        resultEl.className = "eligible";
+    } else {
+        resultEl.textContent = `${name}, you are not ${age} years old `;
+        resultEl.className = "not-eligible";
+    }
+}
+</script>
+
+</body>
+</html>
