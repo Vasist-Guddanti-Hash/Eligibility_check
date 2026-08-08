@@ -67,7 +67,7 @@
     <h2>Form Submission demo</h2>
     <input type="text" id="name" placeholder="Full Name">
     <input type="email" id="email" placeholder="Email">
-    <input type="date" id="dob">
+    <input type="number" id="age" placeholder="Age" min="0">
     <button onclick="checkEligibility()">Submit</button>
     <p id="result"></p>
 </div>
@@ -76,34 +76,21 @@
 function checkEligibility() {
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
-    const dob = document.getElementById('dob').value;
+    const age = document.getElementById('age').value;
     const resultEl = document.getElementById('result');
 
     // Basic validation
-    if (!name || !email || !dob) {
-        resultEl.textContent = "Please fill in all fields.";
-        resultEl.className = "not-eligible";
-        return;
-    }
-
-    // Calculate age
-    const birthDate = new Date(dob);
-    const today = new Date();
-
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDiff = today.getMonth() - birthDate.getMonth();
-    const dayDiff = today.getDate() - birthDate.getDate();
-
-    // Adjust age if birthday hasn't occurred yet this year
-    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
-        age--;
-    }
+    if (!name || !email || !age) {
+    resultEl.textContent = "Please fill in all fields.";
+    resultEl.className = "not-eligible";
+    return;
+}
 
     if (age >= 18) {
         resultEl.textContent = `${name}, you are ${age} years old `;
         resultEl.className = "eligible";
     } else {
-        resultEl.textContent = `${name}, you are not ${age} years old `;
+        resultEl.textContent = `${name}, you are not 18 years old `;
         resultEl.className = "not-eligible";
     }
 }
