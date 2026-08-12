@@ -3,63 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Form Submission demo</title>
-<style>
-    body {
-        background-color: rgb(230, 240, 255);
-        font-family: Arial;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        margin: 0;
-    }
-    .form-box {
-        width: 300px;
-        background-color: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    }
-    h2 {
-        text-align: center;
-    }
-    input {
-        width: 270px;
-        height: 35px;
-        margin-bottom: 15px;
-        padding-left: 10px;
-        border: 1px solid gray;
-        border-radius: 5px;
-        font-size: 15px;
-    }
-    button {
-        width: 285px;
-        height: 40px;
-        background-color: rgb(0, 123, 255);
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.2s;
-    }
-    button:hover {
-        background-color: rgb(0, 90, 190);
-    }
-    #result {
-        text-align: center;
-        font-size: 15px;
-        font-weight: bold;
-        margin-top: 15px;
-        min-height: 20px;
-    }
-    .eligible {
-        color: green;
-    }
-    .not-eligible {
-        color: red;
-    }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -72,28 +16,7 @@
     <p id="result"></p>
 </div>
 
-<script>
-function checkEligibility() {
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const age = document.getElementById('age').value;
-    const resultEl = document.getElementById('result');
-
-    // Basic validation
-    if (!name || !email || !age) {
-    resultEl.textContent = "Please fill in all fields.";
-    resultEl.className = "not-eligible";
-    return;
-}
-
-    if (age >= 18) {
-        resultEl.textContent = `${name}, you are ${age} years old `;
-        resultEl.className = "eligible";
-    } else {
-        resultEl.textContent = `${name}, you are not 18 years old `;
-        resultEl.className = "not-eligible";
-    }
-}
+<script src="script.js">
 </script>
 
 </body>
